@@ -1,0 +1,18 @@
+$c1:#d3d6db;
+$c2:#3a4750;
+$c3:#303841;
+$c4:#be3144;
+$c9:#f1f1f1;
+$sidebar-width:270px;
+
+
+
+$navbar-color:#3d4a61;
+$sidebar-color:$c1;
+$form-color:$c9;
+
+:export {
+    sidebar-width:$sidebar-width;
+    navbar-color:$navbar-color;
+    form-color:$form-color;
+}

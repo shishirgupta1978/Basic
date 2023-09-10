@@ -1,0 +1,70 @@
+@import './Variable.scss';
+/* Header.scss */
+.header {
+   
+    overflow-y: auto;
+    background-color: $navbar-color;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      a{
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+
+    .logoimg{
+      height:24px;
+    }
+    .rounded-circle{
+      height: 24px;
+      width: 24px;
+    }
+    
+  
+    .nav {
+      .nav-list {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+  
+      li {
+        a {
+          text-decoration: none;
+          color: #fff;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+
+        }
+      }
+    }
+  
+    .user {
+      .login-btn,
+      .active{
+        background-color: transparent;
+        color: rgb(170, 209, 197);
+      }
+      .logout {
+        border: none;
+        background-color: transparent;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  

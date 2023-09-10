@@ -1,0 +1,34 @@
+@import './Variable.scss';
+/* Login.scss */
+.form-container{
+ 
+  width: 450px;
+  text-align: center;
+  margin: auto;
+  margin-top: 20px;
+
+}
+.form {
+    background-color: $form-color;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+
+  
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+  
+  
+    button {
+      background-color: $navbar-color;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+  }
+  
