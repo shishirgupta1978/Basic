@@ -1,41 +1,33 @@
-import React,{useEffect,useContext} from 'react'
+import React,{useEffect,useContext, useState} from 'react'
 import { Outlet } from 'react-router-dom';
-import { MyContext } from '../utility';
 import { useNavigate } from 'react-router-dom';
-import { Sidebar } from './Sidebar';
-import { Header } from './Header';
+import { Categories } from './Categories';
 import { Footer } from './Footer';
-import "../assets/styles/Dashboard.scss";
+import { Header } from './Header';
+import "../../assets/styles/Dashboard.scss";
 export const Dashboard = () => {
   const navigate = useNavigate();
   const { context} = useContext(MyContext);
+  const [categories,setCategories] = useState([]);
   
 
 
   useEffect(() => {
-		if(!context.user)
-		{
-			navigate("/");
-		}
 
-	}, [context.user]);
+	}, []);
 
   return (
-    <><Header/><main>
+    <>
+    <Header/>
     <div className='dashboard'>
       <div className='left'>
-      <Sidebar />
+          <Categories categories={categories} />
       </div>
-    
     <div className="right" >
      <Outlet/>
-
-      
-
     </div>
     </div>
-    </main>
-    <Footer/>
+    <Footer footnote={footnote}/>
     </>
 )
 }

@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/auth/user-update/', update_profile ,name='user_update'),
     path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain'),
     path('api/token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),
+    path('api/userprofile/', include('userprofile.urls')),
     
 ]
 if settings.DEBUG:

@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom';
 import { MyContext } from '../utility';
 import { NavLink, useNavigate  } from 'react-router-dom';
 import '../assets/styles/HomePage.scss'; // Import Sass for HomePage
+import { Header } from './Header';
+import { Footer } from './Footer';
 
 export const HomePage=()=> {
   const { context} = useContext(MyContext);
@@ -21,6 +23,8 @@ export const HomePage=()=> {
 
 
   return (<>    
+  <Header />
+  <main>
     <div className="home">
       <div className="left">
               <h1>Task Master</h1>
@@ -29,7 +33,9 @@ export const HomePage=()=> {
       <div className="right">
         <Outlet />
       </div>
-      </div></>
+      </div></main>
+      <Footer/>
+      </>
 
   );
 }

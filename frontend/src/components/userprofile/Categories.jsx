@@ -4,13 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { axiosApi,MyContext } from '../utility';
 import { toast } from 'react-toastify';
 import { Input } from '.';
-import '../assets/styles/Sidebar.scss'
+import '../../assets/styles/Sidebar.scss'
 
 
-export const Sidebar = () => {
-  const { context,setContext } = useContext(MyContext);
-	const [source, setSource] = useState(null);
-
+export const Categories = (props) => {
   const [isOpen,setIsOpen]=useState(true);
   const toggle =()=>{
     setIsOpen(!isOpen);
@@ -30,9 +27,7 @@ export const Sidebar = () => {
       <div className="sidebar-menu">
 			<NavLink to="/dashboard/utility">Utility</NavLink>
       <NavLink to="/dashboard/task2">Task2</NavLink>
-      <NavLink to="/dashboard/updateprofile">Update Profile</NavLink>
-      <NavLink to="/dashboard/updatecategories">Product Categories</NavLink>
-      <NavLink to="/dashboard/updateproducts">Products</NavLink>
+      <NavLink to="/dashboard/task3">Task3</NavLink>
       </div>
            
     </div>
