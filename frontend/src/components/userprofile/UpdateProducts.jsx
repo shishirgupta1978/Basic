@@ -22,7 +22,12 @@ export const UpdateProducts = () => {
     const [ updateId,setUpdateId] = useState(null);
 
 	const [formData, setFormData] = useState({
-		name:''
+		name:'',
+		img_url:'',
+		category:'',
+		price:null,
+		is_available:null
+
 	  });
 
 	  const handleChange = (event) => {
@@ -79,7 +84,7 @@ export const UpdateProducts = () => {
         setUpdateId(id)
 
 			const config = { method: "get", headers: { 'Content-Type': 'multipart/form-data', "Authorization": true }}
-			axiosApi(`api/userprofile/category/${id}/`, config, setEditData,setContext);
+			axiosApi(`api/userprofile/product/${id}/`, config, setEditData,setContext);
 		};	
 
     const submitDelete = (id) => {
@@ -94,11 +99,11 @@ export const UpdateProducts = () => {
         if(updateId)
         {
 			const config = { method: "put", headers: { 'Content-Type': 'multipart/form-data', "Authorization": true }, data:formData }
-			axiosApi(`api/userprofile/updatecategory/${updateId}/`, config, setUpdateData,setContext);
+			axiosApi(`api/userprofile/updateproduct/${updateId}/`, config, setUpdateData,setContext);
         }
         else{
             const config = { method: "post", headers: { 'Content-Type': 'multipart/form-data', "Authorization": true }, data:formData }
-			axiosApi(`api/userprofile/category/`, config, setSaveData,setContext);
+			axiosApi(`api/userprofile/product/`, config, setSaveData,setContext);
         }
 		};	
 
@@ -117,7 +122,10 @@ export const UpdateProducts = () => {
 			
 							<h2> Product Category</h2>
 						<form onSubmit={submitHandler}>
-				<Input  label='Category Name' type='text' name='name' value={formData.name} onChange={handleChange} required/>
+				<Input  label='Product Name' type='text' name='name' value={formData.name} onChange={handleChange} required/>
+				<Input  label='Img Url' type='text' name='img_url' value={formData.img_url} onChange={handleChange} required/>
+				<Input  label='price' type='text' name='name' value={formData.price} onChange={handleChange} required/>
+				<p style={{textAlign:"left", marginLeft:'10px'}}><input  type='checkbox' name='is_available' value={formData.is_available} onChange={handleChange} /> Is Available</p>
 					<button type="submit">{updateId ? "Update": "Add"}</button>
 						</form>
 			</section></>

@@ -131,7 +131,29 @@ def get_products(request):
         return Response(serializer.data,status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_product_by_id(request,id):
+    try:
+        products=Product.objects.filter(category__in=ProductCategory.objects.filter(user=request.user)).filter(id=id)
+        if products.count()>0:
+            serializer=ProductSerializer(products[0])
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Record Not Found"}, status=status.HTTP_400_BAD_REQUEST)
+
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_product_by_id(request,id):
@@ -145,3 +167,48 @@ def delete_product_by_id(request,id):
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def save_product(request):
+    try:
+        categories=ProductCategory.objects.filter(user=request.user,id=int(request.data.get("category")))
+        if categories.count() > 0:
+            if (Product.objects.filter(name=request.data.get("name"),img_url=request.data.get("img_url"),price=int(request.data.get("price")),is_available=bool(request.data.get("is_available")),category=categories[0]).count() == 0):
+               Product.objects.create(name=request.data.get("name"),img_url=request.data.get("img_url"),price=int(request.data.get("price")),is_available=bool(request.data.get("is_available")),category=categories[0])
+               return Response(status=status.HTTP_201_CREATED)
+            else:
+                return Response({"error": "Product already exists."}, status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            return Response({"error": "Category does not exists."}, status=status.HTTP_400_BAD_REQUEST)
+
+    except ValidationError as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_product(request,id):
+    try:
+        categories=ProductCategory.objects.filter(user=request.user,id=int(request.data.get("category")))
+        if categories.count()>0:
+            category =categories[0]
+            products=Product.objects.filter(category=category,id=id)
+            if products.count()>0:
+                product=products[0]
+                product.name=request.data.get("name")
+                product.price=int(request.data.get("price"))
+                product.img_url=request.data.get("img_url")
+                product.is_available=bool(request.data.get("is_available"))
+                if Product.objects.filter( name=request.data.get("name"), price=int(request.data.get("price")), category=category,is_available=bool(request.data.get("is_available")),img_url=request.data.get("img_url")).count() ==0:
+                    product.save()
+                    return Response(status=status.HTTP_200_OK)
+                else:
+                    return Response({'error':"Record with same name already exists."},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                    return Response({'error':"Product does not exists."},status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
