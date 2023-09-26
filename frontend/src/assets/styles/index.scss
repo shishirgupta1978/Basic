@@ -35,6 +35,16 @@ main{
     //text-align: center;
 }
 
+.btn{
+padding: '8px 16px';
+margin-right: '8px';
+background-color: '#007bff';
+color: '#fff';
+border: 'none';
+border-radius: '4px';
+outline: 'none'
+}
+
 /* Add media queries for responsiveness */
 @media screen and (max-width: 768px) {
     .column {

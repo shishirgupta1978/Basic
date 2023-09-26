@@ -8,6 +8,25 @@ import { toast } from "react-toastify";
 import {Spinner} from "..";
 import { Input } from "..";
 export const UpdateCategories = () => {
+	const ButtonStyles = {
+		button: {
+		  padding: '8px 16px',
+		  marginRight: '8px',
+		  backgroundColor: '#007bff',
+		  color: '#fff',
+		  border: 'none',
+		  borderRadius: '4px',
+		  cursor: 'pointer',
+		  outline: 'none',
+		},
+		editButton: {
+		  backgroundColor: '#28a745',
+		},
+		deleteButton: {
+		  backgroundColor: '#dc3545',
+		},
+	  };
+	  
   
 
 
@@ -129,7 +148,7 @@ export const UpdateCategories = () => {
     <table style={{width:'100%'}}>
         <tbody>
             {
-    loadData.result.map((item) => <tr key={item.id}><td>{item.name}</td> <td><button onClick={()=>submitEdit(item.id)}>Edit</button></td><td><button onClick={()=>submitDelete(item.id)}>Delete</button></td></tr>)}
+    loadData.result.map((item) => <tr key={item.id}><td>{item.name}</td> <td style={{width:'150px'}}><button style={{ ...ButtonStyles.button, ...ButtonStyles.editButton }} onClick={()=>submitEdit(item.id)}>Edit</button> <button style={{ ...ButtonStyles.button, ...ButtonStyles.deleteButton }} onClick={()=>submitDelete(item.id)}>Delete</button></td></tr>)}
     </tbody>
     </table>
     

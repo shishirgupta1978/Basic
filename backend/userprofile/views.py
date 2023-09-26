@@ -172,10 +172,17 @@ def delete_product_by_id(request,id):
 @permission_classes([IsAuthenticated])
 def save_product(request):
     try:
-        categories=ProductCategory.objects.filter(user=request.user,id=int(request.data.get("category")))
+        is_available=True
+        if request.data.get("is_available")=="false":
+            is_available=False
+            
+
+
+
+        categories=ProductCategory.objects.filter(user=request.user,id=request.data.get("category"))
         if categories.count() > 0:
-            if (Product.objects.filter(name=request.data.get("name"),img_url=request.data.get("img_url"),price=int(request.data.get("price")),is_available=bool(request.data.get("is_available")),category=categories[0]).count() == 0):
-               Product.objects.create(name=request.data.get("name"),img_url=request.data.get("img_url"),price=int(request.data.get("price")),is_available=bool(request.data.get("is_available")),category=categories[0])
+            if (Product.objects.filter(name=request.data.get("name"),img_url=request.data.get("img_url"),price=request.data.get("price"),is_available=is_available,category=categories[0]).count() == 0):
+               Product.objects.create(name=request.data.get("name"),img_url=request.data.get("img_url"),price=request.data.get("price"),is_available=is_available,category=categories[0])
                return Response(status=status.HTTP_201_CREATED)
             else:
                 return Response({"error": "Product already exists."}, status=status.HTTP_400_BAD_REQUEST)
@@ -191,6 +198,10 @@ def save_product(request):
 @permission_classes([IsAuthenticated])
 def update_product(request,id):
     try:
+        is_available=True
+        if request.data.get("is_available")=="false":
+            is_available=False
+
         categories=ProductCategory.objects.filter(user=request.user,id=int(request.data.get("category")))
         if categories.count()>0:
             category =categories[0]
@@ -198,10 +209,10 @@ def update_product(request,id):
             if products.count()>0:
                 product=products[0]
                 product.name=request.data.get("name")
-                product.price=int(request.data.get("price"))
+                product.price=request.data.get("price")
                 product.img_url=request.data.get("img_url")
-                product.is_available=bool(request.data.get("is_available"))
-                if Product.objects.filter( name=request.data.get("name"), price=int(request.data.get("price")), category=category,is_available=bool(request.data.get("is_available")),img_url=request.data.get("img_url")).count() ==0:
+                product.is_available=is_available
+                if Product.objects.filter( name=request.data.get("name"), price=request.data.get("price"), category=category,is_available=is_available,img_url=request.data.get("img_url")).count() ==0:
                     product.save()
                     return Response(status=status.HTTP_200_OK)
                 else:
