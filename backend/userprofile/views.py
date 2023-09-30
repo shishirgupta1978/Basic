@@ -223,3 +223,44 @@ def update_product(request,id):
 
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_profile(request,id):
+    try:
+        users=User.objects.filter(pkid=id)
+        if (users.count()>0):
+            profiles=UserProfile.objects.filter(user=users[0])
+            categories=ProductCategory.objects.filter(user=users[0])
+            print(categories)
+            if (profiles.count()>0):
+                serializer=UserProfileSerializer(profiles[0])
+                ss=ProductCategorySerializer(categories,many=True)
+                return Response({'profile':serializer.data,'categories':ss.data}, status=status.HTTP_200_OK)
+            else:
+                return Response({"found":False}, status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            return Response({"found":False}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_products_by_catid(request,id,uid):
+    try:
+        users=User.objects.filter(pkid=uid)
+        if users.count()>0:
+            if id!=0:
+                products=Product.objects.filter(category__in=ProductCategory.objects.filter(user=users[0],id=id))
+            else:
+                products=Product.objects.filter(category__in=ProductCategory.objects.filter(user=users[0]))
+        else:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+        serializer=ProductSerializer(products,many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+

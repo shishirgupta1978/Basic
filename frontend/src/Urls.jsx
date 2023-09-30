@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import {Routes,Route,Navigate} from 'react-router-dom'
 import { Header, Footer, Login, Register, ActivateUser,HomePage,ForgetPassword, Dashboard,UpdateProfile,LogViewer,Utility,ChangePassword ,ResetPassword} from './components'
+import StoreHomePage from './components/userprofile/StoreHomePage'
 import { ToastContainer } from "react-toastify";
 import { UpdateUserProfile }   from './components/userprofile/UpdateUserProfile'
 import { UpdateCategories } from './components/userprofile/UpdateCategies'
@@ -34,9 +35,8 @@ export const Urls=()=> {
         <Route path="updateproducts" element={<UpdateProducts/>}/>
         
         </Route>
-        <Route path="/user/:id" element={<Dashboard />}>
-        <Route index element={<Utility/>}/>  
-        </Route>
+
+        <Route path="/user/:id/" element={<StoreHomePage />}/>
 
 
        </Routes>

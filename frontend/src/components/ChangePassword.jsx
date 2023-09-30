@@ -4,6 +4,7 @@ import { Input } from ".";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {Spinner,Title} from ".";
+import { Button } from "react-bootstrap";
 import { axiosApi,MyContext } from "../utility";
 
 export const ChangePassword = () => {
@@ -62,11 +63,11 @@ export const ChangePassword = () => {
 							<Input  label='Confirm New Password' type='password' name='re_new_password' value={formData.re_new_password} onChange={handleChange}  required/>
 
 							
-							<button
+							<Button variant="dark" className="mt-2"
 								type="submit"
 							>
 								Update
-							</button>
+							</Button>
 						</form>
 
 				

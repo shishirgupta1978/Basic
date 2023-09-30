@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../assets/styles/Form.scss";
 import { BASE_URL,MyContext,axiosApi } from "../../utility";
+import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {Spinner} from "..";
 import { Input } from "..";
@@ -75,7 +75,7 @@ export const UpdateUserProfile = () => {
 				<Input  label='Brand Name' type='text' name='brand_name' value={formData.brand_name} onChange={handleChange}/>
 				<Input  label='Contact No' type='text' name='contact_no' value={formData.contact_no} onChange={handleChange}/>
 				<Input  label='Footnote Text' type='text' name='footnote' value={formData.footnote} onChange={handleChange}/>
-					<button type="submit">Update</button>
+					<Button type="submit" className="my-2" variant="dark">Update</Button>
 						</form>
 			</section></>}
 		</div>

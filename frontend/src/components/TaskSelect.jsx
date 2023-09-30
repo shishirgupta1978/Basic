@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import "../assets/styles/Form.scss";
-import "../assets/styles/Input.scss";
 import { Input } from './Input';
 import { axiosApi, MyContext } from '../utility';
 import { toast } from 'react-toastify';

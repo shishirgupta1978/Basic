@@ -1,13 +1,11 @@
 import React from 'react';
-import '../../assets/styles/Footer.scss';
 
 export const Footer = (props) => {
   return (
-    <>{props.footnote &&
-    <footer className="footer">
-      <div className="footer-content">
-        <p>{props.footnote}</p>
-      </div>
+    <>{props.data.footnote &&
+      <footer className='footer'> 
+      <p className="text-center">
+        {props.data.footnote}</p>
     </footer>}
     </>
   )

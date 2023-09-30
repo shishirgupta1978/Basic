@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import "../assets/styles/Form.scss";
-import "../assets/styles/Utility.scss";
 import { TaskSelect } from './TaskSelect';
 import { axiosApi, BASE_URL, MyContext } from '../utility';
 import { toast } from 'react-toastify';

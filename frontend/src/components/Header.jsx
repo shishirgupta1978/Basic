@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
-import '../assets/styles/Header.scss';
-import {Link, NavLink } from 'react-router-dom';
+import { Navbar, Container, Nav,NavDropdown , Form, FormControl, Button } from 'react-bootstrap';
+import { BiSearch } from 'react-icons/bi';
+import { Link,NavLink } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { getAccessToken, refresh,MyContext,removeUser,BASE_URL } from '../utility';
 import { useNavigate } from "react-router-dom";
@@ -10,13 +11,8 @@ import {MdArrowDropDown} from "react-icons/md"
 import { NoProfileImg, LogoImg } from '../assets/images';
 
 
-
-
-
-
-
-export const Header=()=> {
-
+export const Header = () => {
+  
   const { context, setContext } = useContext(MyContext);
   const [timeLeft, setTimeLeft] = useState(null);
   const [timer, setTimer] = useState(null);
@@ -86,30 +82,49 @@ export const Header=()=> {
   };
 
 
-
   return (
-    <header className="header">
-      <div className="logo"><Link to="/">SG{false && <img src={LogoImg} className='logoimg'/>}</Link></div>
-      <nav className="nav">
-        <ul className="nav-list">
-          <li><NavLink to="/"></NavLink></li>
-                  </ul>
-      </nav>
-      <div className="user">
-        {context.user &&  (
-        <> <nav className="nav">  <ul className="nav-list">
-        <li><NavLink to="/dashboard/profile/" >Hi, {context.user.username}</NavLink> {false &&<img
+    <Navbar expand="lg" bg='dark' variant='dark'>
+      <Container fluid>
+        <Navbar.Brand as={Link} to="/">SG{false && <img src={LogoImg} className='logoimg'/>}</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="m-auto">{false &&<>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown></>}
+          </Nav>
+
+          {context.user ?
+          
+          <Nav className="ml-auto">
+            <Nav.Link as={Link} to="/dashboard/profile/">Hi, {context.user.username} {false &&<img
                         src={context.user.profile_pic ? BASE_URL + context.user.profile_pic : NoProfileImg}
                         alt='profile image' style={{height:'24px'}}
                         className='rounded-circle'
-                      />}</li>
-        <li><NavLink to="/dashboard/changepassword/">Change Password</NavLink></li>
-        <li className='logout' onClick={logoutHandler}>Logout</li>
-                </ul></nav>
-</>
-        ) }
-      </div>
-    </header>
-  );
+                      />}</Nav.Link>
+            <Nav.Link as={Link} to="/dashboard/changepassword/">Change Password</Nav.Link>
+            <Nav.Link  onClick={logoutHandler}>Logout</Nav.Link>
+          </Nav> :          <Nav className="ml-auto">
+            
+          </Nav>
+
+       
 }
+          
+</Navbar.Collapse>   
+      </Container>
+    </Navbar>
+  );
+};
+
 

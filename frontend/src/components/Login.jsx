@@ -1,12 +1,12 @@
 import React, { useEffect, useState,useContext } from "react";
 import jwt_decode from "jwt-decode";
 import { Input } from ".";
+import { Button } from "react-bootstrap";
 import { FaSignInAlt } from "react-icons/fa";
 import { NavLink,Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {Spinner,Title} from ".";
 import {MyContext,axiosApi} from "../utility";
-import '../assets/styles/Form.scss'; // Import Sass for Login component
 
 
 
@@ -89,7 +89,7 @@ export const Login=()=> {
       />
       <div className='row'><div className='column'><input type="checkbox" style={{width:'30px'}} checked={isChecked} onChange={handleCheckboxChange} /> Remember me</div><div className='column'>         <NavLink to="/forgetpassword"> Forget password?</NavLink></div></div>
 
-      <div className='row'><div className='column'><button type="submit">Login</button></div></div>
+      <div className='row'><div className='column'><Button variant="dark" type="submit">Login</Button></div></div>
       </form>
       <p style={{textAlign:'left'}}>Don't have an account? <NavLink to="/register">click here.</NavLink></p>
     </div></>

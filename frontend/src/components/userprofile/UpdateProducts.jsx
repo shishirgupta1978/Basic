@@ -1,9 +1,8 @@
 import React, { useEffect, useState,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../assets/styles/Form.scss";
-import "../../assets/styles/Utility.scss";
-import '../../assets/styles/Input.scss';
 import { BASE_URL,MyContext,axiosApi } from "../../utility";
+import { Table,Button } from "react-bootstrap";
+
 import { toast } from "react-toastify";
 import {Spinner} from "..";
 import { Input } from "..";
@@ -162,7 +161,6 @@ export const UpdateProducts = () => {
  <>
 			<section className="form" style={{width:'100%'}}>
 			
-							<h2> Product Category</h2>
 							<img height="50px" width="50px"  src={formData.img_url} alt="product image"/>
 						<form onSubmit={submitHandler}>
 	{formData.category &&		<>			<div className="material-input">
@@ -185,7 +183,7 @@ export const UpdateProducts = () => {
 				<Input  label='Img Url' type='text' name='img_url' value={formData.img_url} onChange={handleChange} required/>
 				<Input  label='price' type='number' name='price' value={formData.price} onChange={handleChange} required/>
 				<p style={{textAlign:"left", marginLeft:'10px'}}><input  type='checkbox'  onChange={()=>setFormData({...formData,is_available:(!formData.is_available)})} checked={formData.is_available} /> Is Available</p>
-					<button type="submit">{updateId ? "Update": "Add"}</button>
+					<Button type="submit" className="mt-2" variant="dark">{updateId ? "Update": "Add"}</Button>
 						</form>
 			</section></>
       
@@ -193,15 +191,14 @@ export const UpdateProducts = () => {
     </div>
     <div className='right'>
     {loadData.is_success && loadData.result.length >0 && 
-    <table style={{width:'100%'}}>
+    <Table striped bordered hover variant="light" style={{width:'100%'}}>
+	<thead><tr><th>Name</th><th>Pic</th><th>Price</th><th>Availablity</th><th>Category</th><th>Action</th></tr></thead>
         <tbody>
             {
-    loadData.result.map((item) =><tr key={item.id}><td>{item.name}</td><td><img width="50px" height="40px" src={item.img_url}/></td><td>{item.price}</td><td>{item.is_available ? "Yes": "No"}</td><td style={{width:'150px'}}><button style={{ ...ButtonStyles.button, ...ButtonStyles.editButton }}
-	onClick={()=>submitEdit(item.id)}>Edit</button> <button style={{ ...ButtonStyles.button, ...ButtonStyles.deleteButton }}
-	onClick={()=>submitDelete(item.id)}>Delete</button></td></tr>)
+    loadData.result.map((item) =><tr key={item.id}><td>{item.name}</td><td><img width="50px" height="40px" src={item.img_url}/></td><td>{item.price}</td><td>{item.is_available ? "Yes": "No"}</td><td>{item.category_name}</td><td style={{width:'170px'}}><Button type="button" variant="outline-dark" onClick={()=>submitEdit(item.id)}>Edit</Button> <Button  type="button" className="mx-2" variant="dark" onClick={()=>submitDelete(item.id)}>Delete</Button></td></tr>)
 }
     </tbody>
-    </table>
+    </Table>
     
     
     }

@@ -1,6 +1,5 @@
 // MaterialInput.js
 import React from 'react';
-import '../assets/styles/Input.scss';
 
 export const Input = ({ label, icon, ...restProps  }) => {
   return (

@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import "../assets/styles/Dashboard.scss";
 export const Dashboard = () => {
   const navigate = useNavigate();
   const { context} = useContext(MyContext);

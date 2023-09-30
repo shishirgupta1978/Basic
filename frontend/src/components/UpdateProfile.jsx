@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../assets/styles/Form.scss";
+import { Button } from "react-bootstrap";
 import { BASE_URL,MyContext,axiosApi } from "../utility";
 import { toast } from "react-toastify";
 import {Spinner,Title} from ".";
@@ -115,7 +115,7 @@ export const UpdateProfile = () => {
 	};	
 
   return (
-	<div className="form-container">
+	<div className="form-container" >
 	{loadData.is_loading && <Spinner />}
 	
 	{loadData.is_success && <>
@@ -146,7 +146,7 @@ export const UpdateProfile = () => {
 							<Input  label='Last Name' type='text' name='last_name' value={formData.last_name} onChange={handleChange}/>
 							{documentUrl ? <a href={documentUrl}>Download</a> :""}
 							<Input label="Update Documents" style={{marginTop:'5px'}} type='file' name='documents' accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" onChange={handleDocumentChange}/>	
-							<button type="submit">Update</button>
+							<Button type="submit" variant="dark" className="mt-2">Update</Button>
 						</form>
 			</section></>}
 		</div>

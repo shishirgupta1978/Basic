@@ -1,35 +1,11 @@
 import React, { useEffect, useState,useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../../assets/styles/Form.scss";
-import "../../assets/styles/Utility.scss";
-
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { Table,Button } from "react-bootstrap";
 import { BASE_URL,MyContext,axiosApi } from "../../utility";
 import { toast } from "react-toastify";
 import {Spinner} from "..";
 import { Input } from "..";
 export const UpdateCategories = () => {
-	const ButtonStyles = {
-		button: {
-		  padding: '8px 16px',
-		  marginRight: '8px',
-		  backgroundColor: '#007bff',
-		  color: '#fff',
-		  border: 'none',
-		  borderRadius: '4px',
-		  cursor: 'pointer',
-		  outline: 'none',
-		},
-		editButton: {
-		  backgroundColor: '#28a745',
-		},
-		deleteButton: {
-		  backgroundColor: '#dc3545',
-		},
-	  };
-	  
-  
-
-
   
 	const [loadData, setLoadData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
     const [saveData, setSaveData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
@@ -134,10 +110,9 @@ export const UpdateCategories = () => {
  <>
 			<section className="form" style={{width:'100%'}}>
 			
-							<h2> Product Category</h2>
 						<form onSubmit={submitHandler}>
 				<Input  label='Category Name' type='text' name='name' value={formData.name} onChange={handleChange} required/>
-					<button type="submit">{updateId ? "Update": "Add"}</button>
+					<Button type="submit" className="mt-2" variant="dark" >{updateId ? "Update": "Add"}</Button>
 						</form>
 			</section></>
       
@@ -145,14 +120,17 @@ export const UpdateCategories = () => {
     </div>
     <div className='right'>
     {loadData.is_success && loadData.result.length >0 && 
-    <table style={{width:'100%'}}>
+							<>	
+    <Table striped bordered hover variant="light" style={{width:'100%'}}>
+		
+		<thead><tr><th>Category</th><th>Action</th></tr></thead>
         <tbody>
             {
-    loadData.result.map((item) => <tr key={item.id}><td>{item.name}</td> <td style={{width:'150px'}}><button style={{ ...ButtonStyles.button, ...ButtonStyles.editButton }} onClick={()=>submitEdit(item.id)}>Edit</button> <button style={{ ...ButtonStyles.button, ...ButtonStyles.deleteButton }} onClick={()=>submitDelete(item.id)}>Delete</button></td></tr>)}
+    loadData.result.map((item) => <tr key={item.id}><td>{item.name}</td> <td style={{width:'170px'}}><Button  type="button" variant="outline-dark" onClick={()=>submitEdit(item.id)}>Edit</Button> <Button type="button" className="mx-2" variant="dark" onClick={()=>submitDelete(item.id)}>Delete</Button></td></tr>)}
     </tbody>
-    </table>
+    </Table>
     
-    
+    </>
     }
 
       
