@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {Spinner,Title} from "..";
 import {MyContext,axiosApi} from "../../utility";
 import { Footer } from "./Footer";
+import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Products } from "./Products";
 import { Sidebar } from "./Sidebar";
@@ -10,8 +11,8 @@ import { Sidebar } from "./Sidebar";
 
 
 const StoreHomePage = () => {
-    const { id } = useParams();
-    const [categoryid, setCategoryid] = useState(0);
+    const { uid } = useParams();
+    
 	const { context,setContext } = useContext(MyContext);
 	const navigate = useNavigate();
 	const [data, setData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
@@ -20,7 +21,7 @@ const StoreHomePage = () => {
 	useEffect(() => {
 
         const config = { method: "get", headers: { "Content-Type": "application/json" } }
-        axiosApi(`api/userprofile/get-profile/${id}/`, config, setData, setContext);
+        axiosApi(`api/userprofile/get-profile/${uid}/`, config, setData, setContext);
     
 
 	}, []);
@@ -31,20 +32,11 @@ const StoreHomePage = () => {
     <div>
         {data.is_loading && <Spinner/>}
         {data.is_success && data.result && data.result.profile && <>
-        <Header data={data.result.profile} id={id}/>
+        <Header data={data.result.profile} uid={uid} />
         <main>
-    <div className='dashboard'>
-      <div className='left'>
-      {data.is_success && data.result && data.result.categories && <Sidebar data={data.result.categories} id={id} setCategoryid={setCategoryid} />}
-      </div>
     
-    <div className="right" >
-     <Products id={categoryid} uid={id} />
-
-      
-
-    </div>
-    </div>
+    <Outlet/>
+    
     </main>
 
         <Footer data={data.result.profile}/>

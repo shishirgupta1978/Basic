@@ -1,7 +1,7 @@
 # urls.py in your app
 
 from django.urls import path
-from .views import UserProfileUpdateView,get_website,get_user_profile,get_product_categories,get_category_by_id,delete_category_by_id,save_category,update_category,get_products,delete_product_by_id,get_product_by_id,save_product,update_product,get_profile,get_products_by_catid
+from .views import UserProfileUpdateView,get_website,get_user_profile,get_product_categories,get_category_by_id,delete_category_by_id,save_category,update_category,get_products,delete_product_by_id,get_product_by_id,save_product,update_product,get_profile,get_products_by_catid,get_cart_data
 
 urlpatterns = [
     path('website/<int:id>/', get_website, name='get-website'),
@@ -22,5 +22,6 @@ urlpatterns = [
 
     path('get-profile/<int:id>/', get_profile, name='get-profile'),
     path('get-products-by-catid/<int:uid>/<int:id>/', get_products_by_catid, name='get-products-by-catid'),
+    path('get-cart-data/', get_cart_data, name='get-cart-data'),
 
 ]

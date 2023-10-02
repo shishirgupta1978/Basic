@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Navbar, Container, Nav,NavDropdown , Form, FormControl, Button } from 'react-bootstrap';
 import { BiSearch } from 'react-icons/bi';
 import { Link,NavLink } from 'react-router-dom';
+import { Input } from '../Input';
 import jwt_decode from 'jwt-decode';
 import { getAccessToken, refresh,MyContext,removeUser,BASE_URL } from '../../utility';
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { BiRefresh } from "react-icons/bi"
 import {MdArrowDropDown} from "react-icons/md"
 import { NoProfileImg, LogoImg } from '../../assets/images';
+import {Badge} from  'react-bootstrap';
 
 
 export const Header = (props) => {
@@ -78,35 +80,27 @@ export const Header = (props) => {
   const logoutHandler = () => {
     removeUser();
     setContext({ ...context, user: null });
-    navigate(`/user/${props.id}/`);
+    navigate(`/user/${props.uid}/`);
   };
 
 
   return (
     <Navbar expand="lg" bg='dark' variant='dark'>
       <Container fluid>
-        <Navbar.Brand as={Link} to="/">{props.data.logo_img_url && <img src={props.data.logo_img_url} className='logoimg'/>} {props.data.brand_name} </Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">{props.data.logo_img_url && <img height='35px' src={props.data.logo_img_url} className='logoimg'/>} {props.data.brand_name} </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="m-auto">{false &&<>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown></>}
+          <Nav className="m-auto">{true &&<>
+            <Nav.Link as={Link} to={`/user/${props.uid}/`}>Home</Nav.Link>
+            <Nav.Link as={Link} to={`/user/${props.uid}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link>
+            
+</>}
           </Nav>
 
           {context.user ?
           
           <Nav className="ml-auto">
+            
             <Nav.Link as={Link} to="/dashboard/profile/">Hi, {context.user.username} {false &&<img
                         src={context.user.profile_pic ? BASE_URL + context.user.profile_pic : NoProfileImg}
                         alt='profile image' style={{height:'24px'}}

@@ -121,12 +121,7 @@ def update_category(request,id):
 @permission_classes([IsAuthenticated])
 def get_products(request):
     try:
-        
-        
-        
         products=Product.objects.filter(category__in=ProductCategory.objects.filter(user=request.user))
-
-
         serializer=ProductSerializer(products,many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
     except Exception as e:
@@ -181,8 +176,8 @@ def save_product(request):
 
         categories=ProductCategory.objects.filter(user=request.user,id=request.data.get("category"))
         if categories.count() > 0:
-            if (Product.objects.filter(name=request.data.get("name"),img_url=request.data.get("img_url"),price=request.data.get("price"),is_available=is_available,category=categories[0]).count() == 0):
-               Product.objects.create(name=request.data.get("name"),img_url=request.data.get("img_url"),price=request.data.get("price"),is_available=is_available,category=categories[0])
+            if (Product.objects.filter(name=request.data.get("name"),category=categories[0]).count() == 0):
+               Product.objects.create(description=request.data.get("description"),name=request.data.get("name"),img_url=request.data.get("img_url"),img_url2=request.data.get("img_url2"),img_url3=request.data.get("img_url3"),img_url4=request.data.get("img_url4"),discount=request.data.get("discount"),price=request.data.get("price"),is_available=is_available,category=categories[0])
                return Response(status=status.HTTP_201_CREATED)
             else:
                 return Response({"error": "Product already exists."}, status=status.HTTP_400_BAD_REQUEST)
@@ -209,10 +204,15 @@ def update_product(request,id):
             if products.count()>0:
                 product=products[0]
                 product.name=request.data.get("name")
+                product.discount=request.data.get("discount")
                 product.price=request.data.get("price")
                 product.img_url=request.data.get("img_url")
+                product.img_url2=request.data.get("img_url2")
+                product.img_url3=request.data.get("img_url3")
+                product.img_url4=request.data.get("img_url4")
+                product.description=request.data.get("description")
                 product.is_available=is_available
-                if Product.objects.filter( name=request.data.get("name"), price=request.data.get("price"), category=category,is_available=is_available,img_url=request.data.get("img_url")).count() ==0:
+                if Product.objects.filter(description=request.data.get("description"),img_url=request.data.get("img_url"),img_url2=request.data.get("img_url2"),img_url3=request.data.get("img_url3"),img_url4=request.data.get("img_url4"), name=request.data.get("name"), discount=request.data.get("discount"),price=request.data.get("price"), category=category).count() ==0:
                     product.save()
                     return Response(status=status.HTTP_200_OK)
                 else:
@@ -231,7 +231,6 @@ def get_profile(request,id):
         if (users.count()>0):
             profiles=UserProfile.objects.filter(user=users[0])
             categories=ProductCategory.objects.filter(user=users[0])
-            print(categories)
             if (profiles.count()>0):
                 serializer=UserProfileSerializer(profiles[0])
                 ss=ProductCategorySerializer(categories,many=True)
@@ -261,6 +260,17 @@ def get_products_by_catid(request,id,uid):
         serializer=ProductSerializer(products,many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def get_cart_data(request):
+    try:
+        objs=Product.objects.filter(id__in=[id for id in request.data.keys()])
+        serializers= ProductSerializer(objs,many=True)
+        return Response(serializers.data, status=status.HTTP_200_OK)
+ 
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 

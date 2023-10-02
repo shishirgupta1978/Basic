@@ -7,25 +7,6 @@ import { toast } from "react-toastify";
 import {Spinner} from "..";
 import { Input } from "..";
 export const UpdateProducts = () => {
-	const ButtonStyles = {
-		button: {
-		  padding: '8px 16px',
-		  marginRight: '8px',
-		  backgroundColor: '#007bff',
-		  color: '#fff',
-		  border: 'none',
-		  borderRadius: '4px',
-		  cursor: 'pointer',
-		  outline: 'none',
-		},
-		editButton: {
-		  backgroundColor: '#28a745',
-		},
-		deleteButton: {
-		  backgroundColor: '#dc3545',
-		},
-	  };
-	  
 		
 
 
@@ -43,8 +24,13 @@ export const UpdateProducts = () => {
 	const [formData, setFormData] = useState({
 		name:'',
 		img_url:'',
+		img_url2:'',
+		img_url3:'',
+		img_url4:'',
+		description:'',
 		category:null,
 		price:0,
+		discount:0,
 		is_available:true
 
 	  });
@@ -73,7 +59,7 @@ export const UpdateProducts = () => {
 	useEffect(()=>{
 		if(editData.is_success)
 		{
-			setFormData({...formData, name:editData.result.name ,img_url:editData.result.img_url, is_available: editData.result.is_available,price: editData.result.price,category:editData.result.category });
+			setFormData({...formData, name:editData.result.name ,img_url:editData.result.img_url,img_url2:editData.result.img_url2,img_url3:editData.result.img_url3,img_url4:editData.result.img_url4, is_available: editData.result.is_available,price: editData.result.price,discount: editData.result.discount,category:editData.result.category });
 		}
 	},[editData.is_success])
 
@@ -97,8 +83,13 @@ export const UpdateProducts = () => {
             setFormData({
 				name:'',
 				img_url:'',
+				img_url2:'',
+				img_url3:'',
+				img_url4:'',
+				description:'',
 				category:null,
 				price:0,
+				discount:0,
 				is_available:true		
 			  })
 		}
@@ -161,7 +152,7 @@ export const UpdateProducts = () => {
  <>
 			<section className="form" style={{width:'100%'}}>
 			
-							<img height="50px" width="50px"  src={formData.img_url} alt="product image"/>
+						{formData.img_url &&	<img height="50px" width="50px"  src={formData.img_url} alt="product image"/>}
 						<form onSubmit={submitHandler}>
 	{formData.category &&		<>			<div className="material-input">
       <label>Select Category</label>
@@ -180,10 +171,20 @@ export const UpdateProducts = () => {
       </div>
     </div></>}
 				<Input  label='Product Name' type='text' name='name' value={formData.name} onChange={handleChange} required/>
+				<div className="material-input">
+				<label>Description</label>
+				
+		      <div className="input-container"><textarea name='description' value={formData.description} rows="3" onChange={handleChange}/></div></div>
+
+
 				<Input  label='Img Url' type='text' name='img_url' value={formData.img_url} onChange={handleChange} required/>
-				<Input  label='price' type='number' name='price' value={formData.price} onChange={handleChange} required/>
+				<Input  label='Img Url2' type='text' name='img_url2' value={formData.img_url2} onChange={handleChange}/>
+				<Input  label='Img Url3' type='text' name='img_url3' value={formData.img_url3} onChange={handleChange}/>
+				<Input  label='Img Url4' type='text' name='img_url4' value={formData.img_url4} onChange={handleChange}/>
+				<Input  label='Price(Rs.)' type='number' name='price' value={formData.price} onChange={handleChange}/>
+				<Input  label='Discount(%)' type='number' name='discount' value={formData.discount} onChange={handleChange}/>
 				<p style={{textAlign:"left", marginLeft:'10px'}}><input  type='checkbox'  onChange={()=>setFormData({...formData,is_available:(!formData.is_available)})} checked={formData.is_available} /> Is Available</p>
-					<Button type="submit" className="mt-2" variant="dark">{updateId ? "Update": "Add"}</Button>
+					<Button type="submit" className="mt-2" variant="dark">{updateId ? "Update": "Add"} Product</Button>
 						</form>
 			</section></>
       
