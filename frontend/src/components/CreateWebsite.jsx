@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { Footer } from './Footer';
-export const Dashboard = () => {
+export const CreateWebsite = () => {
   const navigate = useNavigate();
   const { context} = useContext(MyContext);
   
@@ -20,7 +20,7 @@ export const Dashboard = () => {
 	}, [context.user]);
 
   return (
-    <><Header/><main>
+    <>
     <div className='dashboard'>
       <div className='left'>
       <Sidebar />
@@ -33,8 +33,7 @@ export const Dashboard = () => {
 
     </div>
     </div>
-    </main>
-    <Footer/>
+    
     </>
 )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Footer = (props) => {
+export const WebsiteFooter = (props) => {
   return (
     <>{props.data.footnote &&
       <footer className='footer'> 

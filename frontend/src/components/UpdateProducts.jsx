@@ -1,11 +1,10 @@
 import React, { useEffect, useState,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL,MyContext,axiosApi } from "../../utility";
+import { BASE_URL,MyContext,axiosApi } from "../utility";
 import { Table,Button } from "react-bootstrap";
 
 import { toast } from "react-toastify";
-import {Spinner} from "..";
-import { Input } from "..";
+import {Spinner,Input} from ".";
 export const UpdateProducts = () => {
 		
 

@@ -1,12 +1,12 @@
 import {PiToggleRightFill,PiToggleLeftFill} from 'react-icons/pi'
 import React,{useState,useEffect,useContext} from 'react'
 import { NavLink } from 'react-router-dom';
-import { axiosApi,MyContext } from '../../utility';
+import { axiosApi,MyContext } from '../utility';
 import { toast } from 'react-toastify';
-import { Input } from '..';
+import { Input } from '.';
 
 
-export const Sidebar = (props) => {
+export const CategoryList = (props) => {
   const { context,setContext } = useContext(MyContext);
 	const [source, setSource] = useState(null);
   console.log(props.data)

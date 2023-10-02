@@ -88,9 +88,9 @@ export const Header = () => {
         <Navbar.Brand as={Link} to="/">SG{false && <img src={LogoImg} className='logoimg'/>}</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="m-auto">{false &&<>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <Nav className="m-auto">{<>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/create-website">Create Website</Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -107,15 +107,15 @@ export const Header = () => {
           {context.user ?
           
           <Nav className="ml-auto">
-            <Nav.Link as={Link} to="/dashboard/profile/">Hi, {context.user.username} {false &&<img
+            <Nav.Link as={Link} to="/profile/">Hi, {context.user.username} {false &&<img
                         src={context.user.profile_pic ? BASE_URL + context.user.profile_pic : NoProfileImg}
                         alt='profile image' style={{height:'24px'}}
                         className='rounded-circle'
                       />}</Nav.Link>
-            <Nav.Link as={Link} to="/dashboard/changepassword/">Change Password</Nav.Link>
+            <Nav.Link as={Link} to="/changepassword/">Change Password</Nav.Link>
             <Nav.Link  onClick={logoutHandler}>Logout</Nav.Link>
           </Nav> :          <Nav className="ml-auto">
-            
+          <Nav.Link as={Link} to="/login">Login</Nav.Link>
           </Nav>
 
        

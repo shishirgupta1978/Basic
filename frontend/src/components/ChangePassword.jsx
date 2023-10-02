@@ -50,8 +50,7 @@ export const ChangePassword = () => {
 		}
 	};
 	return (
-		<div className="form-container">
-			<section className="form">				
+			<section className="form mt-2">				
 					
 							<h2>Change Password</h2>
 	
@@ -72,7 +71,6 @@ export const ChangePassword = () => {
 
 				
 			</section>
-		</div>
 	);
 };
 

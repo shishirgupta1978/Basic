@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Input } from './Input';
+import { Button } from 'react-bootstrap';
 
 export const ForgetPassword=()=> {
   const [Email, setEmail] = useState('');
@@ -11,7 +12,7 @@ export const ForgetPassword=()=> {
   };
 
   return (
-    <div className="form">
+    <div className="form mt-2">
       <h2>Forget Password</h2>
       <Input
         type="email"
@@ -19,9 +20,8 @@ export const ForgetPassword=()=> {
         value={Email}
         onChange={(e) => setEmail(e.target.value)}
       />
-					
-      <button onClick={handleEmail}>Send Email</button>
-      <p style={{textAlign:'left'}}>Back to <NavLink to="/">Login Page</NavLink></p>
+					<Button variant="dark" type="submit" onClick={handleEmail}>Send Email </Button>
+      <p style={{textAlign:'left'}}>Back to <NavLink to="/login">Login Page</NavLink></p>
     </div>
   );
 }

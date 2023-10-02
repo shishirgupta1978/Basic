@@ -4,6 +4,8 @@ import { Input } from ".";
 import { Button } from "react-bootstrap";
 import { FaSignInAlt } from "react-icons/fa";
 import { NavLink,Link, useNavigate } from "react-router-dom";
+import {  useParams } from "react-router-dom";
+
 import { toast } from "react-toastify";
 import {Spinner,Title} from ".";
 import {MyContext,axiosApi} from "../utility";
@@ -14,6 +16,7 @@ import {MyContext,axiosApi} from "../utility";
 
 
 export const Login=()=> {
+  const { uid } = useParams();
   const [email, setEmail] = useState(localStorage.getItem("email") ? localStorage.getItem("email") :'');
   const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(localStorage.getItem("email") ? true :false);
@@ -39,7 +42,7 @@ export const Login=()=> {
 		}
 		if(context.user)
 		{
-//			navigate("/");
+			navigate("/");
 		}
 
 	}, [data,context.user]);
@@ -67,7 +70,7 @@ export const Login=()=> {
   return (
     <>
     {data.is_loading && <Spinner />}
-    <div className="form">
+    <div className="form mt-2">
       <h2>Login</h2>
       <form onSubmit={submitHandler}>
       

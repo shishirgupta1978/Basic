@@ -115,11 +115,11 @@ export const UpdateProfile = () => {
 	};	
 
   return (
-	<div className="form-container" >
+	<div >
 	{loadData.is_loading && <Spinner />}
 	
 	{loadData.is_success && <>
-			<section className="form">
+			<section className="form mt-2">
 			
 							<h2> Update Profile</h2>
 						<form onSubmit={submitHandler}>

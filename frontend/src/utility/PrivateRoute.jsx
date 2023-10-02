@@ -8,8 +8,6 @@ export const PrivateRoute = props => {
 
   const { context } = useContext(MyContext);
     if (!context.user) {
-      //dispatch(updateaccess({"url": "/api/auth/refresh/", "method": "post","data" :{'refresh':user?.refresh}}));
-
     return <Navigate to="/login" state={{ from: location }} />;
 
   }

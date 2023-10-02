@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Form, Button,Table } from 'react-bootstrap';
 
 import { Outlet } from 'react-router-dom';
-import { MyContext,axiosApi } from '../../utility';
+import { MyContext,axiosApi } from '../utility';
 import { NavLink, useNavigate  } from 'react-router-dom';
 
 
 
-const Cart = () => {
+export const Cart = () => {
 const { context, setContext } = useContext(MyContext);
 
 
@@ -41,7 +41,19 @@ useEffect(() => {
         
         </Col>
         <Col md={6} style={{paddingTop:'10px'}}>
-           <Outlet/>
+        <div className="form mt-2">
+      <h2>Shipping Address</h2>
+      <div className="material-input">
+				<label>Address</label>
+				
+		      <div className="input-container"><textarea name='Address' value='' rows="3" required/></div></div>
+
+      <Row><Col>
+      <Button variant="dark" type="submit">Generate Invoice</Button></Col></Row>
+
+
+    </div>
+
           </Col>
       </Row>
     </Container>
@@ -50,4 +62,3 @@ useEffect(() => {
   )
 }
 
-export default Cart

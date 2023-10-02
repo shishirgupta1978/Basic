@@ -1,10 +1,9 @@
 import React, { useEffect, useState,useContext } from "react";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { Table,Button } from "react-bootstrap";
-import { BASE_URL,MyContext,axiosApi } from "../../utility";
+import { BASE_URL,MyContext,axiosApi } from "../utility";
 import { toast } from "react-toastify";
-import {Spinner} from "..";
-import { Input } from "..";
+import {Spinner,Input} from ".";
 export const UpdateCategories = () => {
   
 	const [loadData, setLoadData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })

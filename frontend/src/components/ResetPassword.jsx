@@ -52,7 +52,7 @@ export const ResetPassword = () => {
 	};
 	return (
 		<div className="form-container">
-			<div className="form">				
+			<div className="form mt-2">				
 					
 							<h2 className="text-center">
 								 Reset Password

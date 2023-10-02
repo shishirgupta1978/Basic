@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Spinner, Title } from "..";
-import { MyContext, axiosApi } from "../../utility";
+import { Spinner, Title,CategoryList,ProductCard } from ".";
+import { MyContext, axiosApi } from "../utility";
 import { Container, Row, Col } from "react-bootstrap";
-import { ProductCard } from "./ProductCard";
-import { Sidebar } from "./Sidebar";
+
 
 
 export const Products = () => {
@@ -40,7 +39,7 @@ export const Products = () => {
     {products.is_loading && <Spinner />}
     <div className="dashboard">
       <div className='left'>
-        {categories.is_success && categories.result && categories.result.categories && <Sidebar data={categories.result.categories} setCategoryid={setCategoryid} />}
+        {categories.is_success && categories.result && categories.result.categories && <CategoryList data={categories.result.categories} setCategoryid={setCategoryid} />}
         
       </div>
 

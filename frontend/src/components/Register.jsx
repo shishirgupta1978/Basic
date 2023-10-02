@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { NavLink } from 'react-router-dom';
 import { Input } from './Input';
-
+import { Button } from 'react-bootstrap';
 
 export const Register = () => {
     const [username, setUsername] = useState('');
@@ -13,7 +13,7 @@ export const Register = () => {
       };
 
   return (
-    <div className="form">
+    <div className="form mt-2">
       <h2>Register</h2>
       <Input
         type="text"
@@ -40,8 +40,10 @@ export const Register = () => {
         onChange={(e) => setRepassword(e.target.value)}
       />
 
-      <div className='row'><div className='column'><button onClick={handleRegister}>Register</button></div></div>
-      <p style={{textAlign:'left'}}>Already have an account? <NavLink to="/">click here.</NavLink></p>
+      <div className='row'><div className='column'>
+      <Button variant="dark" type="submit" onClick={handleRegister}>Register</Button>
+</div></div>
+      <p style={{textAlign:'left'}}>Already have an account? <NavLink to="/login">click here.</NavLink></p>
     </div>
   )
 }

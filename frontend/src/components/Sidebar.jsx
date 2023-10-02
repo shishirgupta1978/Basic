@@ -29,9 +29,9 @@ export const Sidebar = () => {
       <div className="sidebar-menu">
 		{/*	<NavLink to="/dashboard/utility">Utility</NavLink>
       <NavLink to="/dashboard/task2">Task2</NavLink>*/}
-      <NavLink to="/dashboard/updateprofile">Profile</NavLink>
-      <NavLink to="/dashboard/updatecategories">Categories</NavLink>
-      <NavLink to="/dashboard/updateproducts">Products</NavLink>
+      <NavLink to="/create-website">Profile</NavLink>
+      <NavLink to="/create-website/update-categories">Categories</NavLink>
+      <NavLink to="/create-website/update-products">Products</NavLink>
       </div>
            
     </div>

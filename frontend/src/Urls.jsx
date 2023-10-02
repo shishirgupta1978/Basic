@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+
 import {Routes,Route,Navigate} from 'react-router-dom'
-import { Header, Footer, Login, Register, ActivateUser,HomePage,ForgetPassword, Dashboard,UpdateProfile,LogViewer,Utility,ChangePassword ,ResetPassword} from './components'
-import StoreHomePage from './components/userprofile/StoreHomePage'
+import { Layout, Login, Register, ActivateUser,HomePage,ForgetPassword, UpdateProfile,LogViewer,Utility,ChangePassword ,ResetPassword, CreateWebsite,WebsiteProfile,UpdateCategories,UpdateProducts,Cart,Products,Website } from './components'
 import { ToastContainer } from "react-toastify";
-import { UpdateUserProfile }   from './components/userprofile/UpdateUserProfile'
-import { UpdateCategories } from './components/userprofile/UpdateCategies'
-import { UpdateProducts } from './components/userprofile/UpdateProducts'
-import Cart from './components/userprofile/Cart'
-import { Products } from './components/userprofile/Products'
+
+import { PrivateRoute } from './utility'
 
 export const Urls=()=> {
 
@@ -19,39 +16,38 @@ export const Urls=()=> {
       
       
       <Routes>
-        <Route path="/" element={<HomePage />}>
-        <Route index element={<Login/>}/>
+        
+        <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage/>}/>  
+        <Route path="create-website" element={<PrivateRoute><CreateWebsite/></PrivateRoute>}>
+        <Route index element={<PrivateRoute><WebsiteProfile/></PrivateRoute>}/>  
+        <Route path="update-categories" element={<UpdateCategories/>}/>
+        <Route path="update-products" element={<UpdateProducts/>}/>
+        <Route path="website" element={<ChangePassword/>}/>
+        </Route>
+
+        
+        
+
+</Route>
+<Route path="website/:uid" element={<Website />}>
+   
+        
+        
+
+        
+   <Route index element={ <Products/>}/>
+   <Route path="cart" element={<Cart/>}/>
+   <Route path="login" element={<Login/>}/>
         <Route path="forgetpassword" element={<ForgetPassword/>}/>
         <Route path="register" element={<Register/>}/>
         <Route path="activate/:uid/:token" element={<ActivateUser/>}/>
         <Route path="resetpassword" element={<ResetPassword/>}/>
-        </Route>
-        <Route path="/dashboard" element={<Dashboard />}>
-        <Route index element={<UpdateUserProfile/>}/>  
-        <Route path="profile" element={<UpdateProfile/>}/>
-        <Route path="changepassword" element={<ChangePassword/>}/>
-        <Route path="utility" element={<Utility/>}/>
-        <Route path="task2" element={<LogViewer/>}/>
-        <Route path="updateprofile" element={<UpdateUserProfile/>}/>
-        <Route path="updatecategories" element={<UpdateCategories/>}/>
-        <Route path="updateproducts" element={<UpdateProducts/>}/>
-        
-        </Route>
+        <Route path="profile" element={<PrivateRoute><UpdateProfile/></PrivateRoute>}/>
+        <Route path="changepassword" element={<PrivateRoute><ChangePassword/></PrivateRoute>}/>
+   
 
-        <Route path="/user/:uid" element={<StoreHomePage />}>
-        <Route index element={ <Products/>}/>
-        <Route path="cart" element={<Cart/>}>
-        
-          <Route index element={<Login/>}/>
-          <Route path="forgetpassword" element={<ForgetPassword/>}/>
-          <Route path="register" element={<Register/>}/>
-          <Route path="activate/:uid/:token" element={<ActivateUser/>}/>
-          <Route path="resetpassword" element={<ResetPassword/>}/>
-          </Route>
-          </Route>
-
-        
-
+     </Route>
 
 
        </Routes>

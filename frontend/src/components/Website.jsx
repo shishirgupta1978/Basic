@@ -1,16 +1,16 @@
 import React, { useEffect, useState,useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {Spinner,Title} from "..";
-import {MyContext,axiosApi} from "../../utility";
-import { Footer } from "./Footer";
+import {Spinner,Title} from ".";
+import {MyContext,axiosApi} from "../utility";
+import { WebsiteFooter } from "./WebsiteFooter";
 import { Outlet } from "react-router-dom";
-import { Header } from "./Header";
+import { WebsiteHeader } from "./WebsiteHeader";
 import { Products } from "./Products";
 import { Sidebar } from "./Sidebar";
 
 
 
-const StoreHomePage = () => {
+export const Website = () => {
     const { uid } = useParams();
     
 	const { context,setContext } = useContext(MyContext);
@@ -32,14 +32,14 @@ const StoreHomePage = () => {
     <div>
         {data.is_loading && <Spinner/>}
         {data.is_success && data.result && data.result.profile && <>
-        <Header data={data.result.profile} uid={uid} />
+        <WebsiteHeader data={data.result.profile} uid={uid} />
         <main>
     
     <Outlet/>
     
     </main>
 
-        <Footer data={data.result.profile}/>
+        <WebsiteFooter data={data.result.profile}/>
         </>}
         {data.is_error && <p>Failed to Load, Try after Sometime.</p>}
       
@@ -47,4 +47,3 @@ const StoreHomePage = () => {
   )
 }
 
-export default StoreHomePage
