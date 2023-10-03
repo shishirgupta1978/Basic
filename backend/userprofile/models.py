@@ -4,18 +4,34 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from account.models import User
+from django.template.defaultfilters import slugify
 
 
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name="profile")
+    website_url = models.SlugField(unique=True,blank=True, null=True)
     logo_img_url = models.CharField(verbose_name=_("Logo Url"), max_length=255,blank=True,null=True)
     brand_name = models.CharField(verbose_name=_("Brand Name"), max_length=50,blank=True,null=True)
     contact_no = models.CharField(verbose_name=_("contact"), max_length=100,blank=True,null=True)
     footnote=models.CharField(verbose_name=_("footnote"), max_length=100,blank=True,null=True)
     def __str__(self):
         return self.user.username+"'s profile"
+    def save(self, *args, **kwargs):
+        # If the slug is not set or is None, generate a slug from the title
+        if not self.website_url:
+            if self.brand_name:
+                self.website_url = slugify(self.brand_name)
+
+                # Check if the generated slug already exists, and append a unique identifier if needed
+                base_slug = self.website_url
+                counter = 1
+                while UserProfile.objects.filter(website_url=self.website_url).exclude(pk=self.pk).exists():
+                    self.website_url = f"{base_slug}-{counter}"
+                    counter += 1
+        super().save(*args, **kwargs)
+    
 
     
 

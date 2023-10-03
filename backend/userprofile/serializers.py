@@ -6,7 +6,7 @@ from account.models import User
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('id', 'user', 'logo_img_url', 'brand_name',"contact_no","footnote")  
+        fields = ('id', 'user','website_url', 'logo_img_url', 'brand_name',"contact_no","footnote")  
 
 class ProductSerializer(serializers.ModelSerializer):
     category_name= serializers.SerializerMethodField()

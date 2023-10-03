@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics,status
 from django.core.exceptions import ValidationError
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 from .models import UserProfile,ProductCategory,Product
 from account.models import User
 from .serializers import UserProfileSerializer,UserDetailSerializer,ProductCategorySerializer,ProductSerializer
@@ -273,4 +274,21 @@ def get_cart_data(request):
  
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_website_list(request):
+    try:
+        objs=UserProfile.objects.exclude(website_url__isnull=True)
+        serializers= UserProfileSerializer(objs,many=True)
+        return Response(serializers.data, status=status.HTTP_200_OK)
+ 
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_website_by_slug(request,slug):
+    obj=get_object_or_404(UserProfile,website_url=slug)
+    serializers= UserProfileSerializer(obj)
+    return Response(serializers.data, status=status.HTTP_200_OK)
 
