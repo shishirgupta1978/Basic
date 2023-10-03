@@ -80,7 +80,7 @@ export const WebsiteHeader = (props) => {
   const logoutHandler = () => {
     removeUser();
     setContext({ ...context, user: null });
-    navigate(`/website/${props.uid}/`);
+    navigate(`/${props.website}/`);
   };
 
 
@@ -91,8 +91,8 @@ export const WebsiteHeader = (props) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="m-auto">{true &&<>
-            <Nav.Link as={Link} to={`/website/${props.uid}/`}>Home</Nav.Link>
-            <Nav.Link as={Link} to={`/website/${props.uid}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link>
+            <Nav.Link as={Link} to={`/${props.website}/`}>Home</Nav.Link>
+            <Nav.Link as={Link} to={`/${props.website}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link>
             
 </>}
           </Nav>
@@ -101,15 +101,15 @@ export const WebsiteHeader = (props) => {
           
           <Nav className="ml-auto">
             
-            <Nav.Link as={Link} to="/profile/">Hi, {context.user.username} {false &&<img
+            <Nav.Link as={Link} to={`/${props.website}/profile/`}>Hi, {context.user.username} {false &&<img
                         src={context.user.profile_pic ? BASE_URL + context.user.profile_pic : NoProfileImg}
                         alt='profile image' style={{height:'24px'}}
                         className='rounded-circle'
                       />}</Nav.Link>
-            <Nav.Link as={Link} to="/changepassword/">Change Password</Nav.Link>
+            <Nav.Link as={Link} to={`/${props.website}/changepassword/`}>Change Password</Nav.Link>
             <Nav.Link  onClick={logoutHandler}>Logout</Nav.Link>
           </Nav> :          <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/login">Login</Nav.Link>
+          <Nav.Link as={Link} to={`/${props.website}/login`}>Login</Nav.Link>
           </Nav>
 
        

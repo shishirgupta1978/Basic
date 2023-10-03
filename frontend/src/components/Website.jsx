@@ -11,7 +11,7 @@ import { Sidebar } from "./Sidebar";
 
 
 export const Website = () => {
-    const { uid } = useParams();
+    const { website } = useParams();
     
 	const { context,setContext } = useContext(MyContext);
 	const navigate = useNavigate();
@@ -19,9 +19,10 @@ export const Website = () => {
 
 
 	useEffect(() => {
+    console.log(website);
 
         const config = { method: "get", headers: { "Content-Type": "application/json" } }
-        axiosApi(`api/userprofile/get-profile/${uid}/`, config, setData, setContext);
+        axiosApi(`api/userprofile/get-website/${website}/`, config, setData, setContext);
     
 
 	}, []);
@@ -32,7 +33,7 @@ export const Website = () => {
     <div>
         {data.is_loading && <Spinner/>}
         {data.is_success && data.result && data.result.profile && <>
-        <WebsiteHeader data={data.result.profile} uid={uid} />
+        <WebsiteHeader data={data.result.profile} website={website} />
         <main>
     
     <Outlet/>

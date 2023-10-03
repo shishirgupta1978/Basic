@@ -8,7 +8,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 export const Products = () => {
   const { context, setContext } = useContext(MyContext);
-  const { uid } = useParams();
+  const { website } = useParams();
   const [categoryid, setCategoryid] = useState(0);
   const navigate = useNavigate();
   const [categories, setCategories] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
@@ -17,15 +17,20 @@ export const Products = () => {
   const [ cart,setCart] = useState(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) :{});
 
 	useEffect(() => {
+
+    if(website.toLowerCase()=="webmaster")
+    {
+      navigate("/webmaster/weblist/");
+    }
     const config = { method: "get", headers: { "Content-Type": "application/json" } }
-    axiosApi(`api/userprofile/get-profile/${uid}/`, config, setCategories, setContext);
+    axiosApi(`api/userprofile/get-website/${website}/`, config, setCategories, setContext);
 
 }, []);
 
 
   useEffect(() => {
     const config = { method: "get", headers: { "Content-Type": "application/json" } }
-    axiosApi(`api/userprofile/get-products-by-catid/${uid}/${categoryid}/`, config, setProducts, setContext);
+    axiosApi(`api/userprofile/get-products-by-catid/${website}/${categoryid}/`, config, setProducts, setContext);
   }, [categoryid]);
 
 

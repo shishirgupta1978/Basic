@@ -28,10 +28,6 @@ class UserDetailSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'profile','product_categories')  
 
-class UserProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserProfile
-        fields = ('id', 'logo_img_url','brand_name','contact_no','footnote')  
 
 
 
