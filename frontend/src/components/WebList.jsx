@@ -7,13 +7,13 @@ import { Container, Row, Col } from "react-bootstrap";
 
 
 export const WebList = () => {
-  const { context, setContext } = useContext(MyContext);
+  const { context, setContext,search } = useContext(MyContext);
   const { website } = useParams();
   const [categoryid, setCategoryid] = useState(0);
   const navigate = useNavigate();
   const [categories, setCategories] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
   const [websites, setWebsites] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
-  const [search,setSearch] = useState('');
+  
   const [ cart,setCart] = useState(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) :{});
 
 	useEffect(() => {
@@ -36,7 +36,6 @@ export const WebList = () => {
     <div className="dashboard">
         
         <Container>
-          <Row><input type="search" style={{ padding: '6px',margin:'auto',marginBottom:"20px",marginTop:"20px", borderRadius: '5px solid black', width: '320px' }} onChange={(e) => { setSearch(e.target.value); }} placeholder="Search..."  /></Row>
           <Row sm={12} md={3}>{websites.is_success && websites.result && websites.result.filter((website) => website.website_url.toLowerCase().includes(search.toLowerCase())).map((website) => <Col key={website.id} className="mb-2"><NavLink to={`/${website.website_url}/`}>{website.website_url}</NavLink></Col>)}</Row>
         </Container>
       </div>

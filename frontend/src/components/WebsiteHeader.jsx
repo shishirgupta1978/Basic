@@ -87,14 +87,15 @@ export const WebsiteHeader = (props) => {
   return (
     <Navbar expand="lg" bg='dark' variant='dark'>
       <Container fluid>
-        <Navbar.Brand as={Link} to="/">{props.data.logo_img_url && <img height='35px' src={props.data.logo_img_url} className='logoimg'/>} {props.data.brand_name} </Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">{props.data.logo_img_url ? <img height='22px' src={props.data.logo_img_url} className='logoimg'/> : props.data.brand_name}  </Navbar.Brand>
         <Nav className="m-auto"><Nav.Link>
+          <div>
           <input onChange={(e)=>setSearch(e.target.value)} 
             type="search"  
             value={search}
-            placeholder="Seadrch"  
-            className="ms-2"  
-          />  
+            placeholder="Search" 
+            className='form-control' 
+          />  </div>
          </Nav.Link>
    </Nav>
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Form, Button,Table } from 'react-bootstrap';
+import { Spinner } from "./Spinner";
 
 import { Outlet } from 'react-router-dom';
 import { MyContext,axiosApi } from '../utility';
 import { NavLink, useNavigate  } from 'react-router-dom';
+import { Input } from "./Input";
 
 
 
@@ -25,9 +27,10 @@ useEffect(() => {
 
   return (
     <div>
-         <Container fluid>
+      {loadData.is_loading && <Spinner/>}
+      {loadData.is_success && loadData.result.length>0 &&         <Container fluid>
       <Row>
-        <Col md={6}>{loadData.is_success && loadData.result.length>0 &&
+        <Col md={6}>
           <Table striped bordered hover variant="light" style={{width:'100%',marginTop:'10px'}}>
 	<thead><tr><th>Pic</th><th>Name</th><th>Price</th><th>Quantity</th><th>Amount</th></tr></thead>
         <tbody>
@@ -37,12 +40,15 @@ useEffect(() => {
   return accumulator + ((item.price-(item.price*item.discount/100)) * cart[item.id]);
 }, 0)}</td></tr>
     </tbody>
-    </Table>}
+    </Table>
         
         </Col>
         <Col md={6} style={{paddingTop:'10px'}}>
+
         <div className="form mt-2">
       <h2>Shipping Address</h2>
+      <Input label="Name" name='name' value='' required/>
+      <Input label="Mobile No" name='mobile' value='' required/>
       <div className="material-input">
 				<label>Address</label>
 				
@@ -56,8 +62,8 @@ useEffect(() => {
 
           </Col>
       </Row>
-    </Container>
-      
+    </Container>}
+    {loadData.is_success && loadData.result.length==0 &&         <p>No Product Added</p>}
     </div>
   )
 }

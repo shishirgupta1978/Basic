@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import { FaSignInAlt } from "react-icons/fa";
 import { NavLink,Link, useNavigate } from "react-router-dom";
 import {  useParams } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 import { toast } from "react-toastify";
 import {Spinner,Title} from ".";
@@ -16,7 +17,7 @@ import {MyContext,axiosApi} from "../utility";
 
 
 export const Login=()=> {
-  const { uid } = useParams();
+  const { website } = useParams();
   const [email, setEmail] = useState(localStorage.getItem("email") ? localStorage.getItem("email") :'');
   const [password, setPassword] = useState('');
   const [isChecked, setIsChecked] = useState(localStorage.getItem("email") ? true :false);
@@ -26,8 +27,10 @@ export const Login=()=> {
 	const handleCheckboxChange = (event) => {
 	  setIsChecked(event.target.checked);
 	};
-  
-	
+
+
+ const location = useLocation(); 	
+ const { from } = location.state || {};
 	const navigate = useNavigate();
 
 
@@ -37,12 +40,19 @@ export const Login=()=> {
 			localStorage.setItem("Tokens",JSON.stringify(data.result));
      	    setContext({...context,user:jwt_decode(data.result.access)});
 
-			navigate(-1);
+			
+      
 
 		}
 		if(context.user)
 		{
-			navigate(-1);
+			
+      if(from.pathname){
+        navigate(from.pathname)
+      }
+      else{
+        navigate(`/${website}/`);
+      }
 		}
 
 	}, [data,context.user]);
@@ -90,11 +100,11 @@ export const Login=()=> {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <div className='row'><div className='column'><input type="checkbox" style={{width:'30px'}} checked={isChecked} onChange={handleCheckboxChange} /> Remember me</div><div className='column'>         <NavLink to="/forgetpassword"> Forget password?</NavLink></div></div>
+      <div className='row'><div className='column'><input type="checkbox" style={{width:'30px'}} checked={isChecked} onChange={handleCheckboxChange} /> Remember me</div><div className='column'>         <NavLink to={`/${website}/forgetpassword/`}> Forget password?</NavLink></div></div>
 
       <div className='row'><div className='column'><Button variant="dark" type="submit">Login</Button></div></div>
       </form>
-      <p style={{textAlign:'left'}}>Don't have an account? <NavLink to="/register">click here.</NavLink></p>
+      <p style={{textAlign:'left'}}>Don't have an account? <NavLink to={`/${website}/register/`}>click here.</NavLink></p>
     </div></>
   );
 }

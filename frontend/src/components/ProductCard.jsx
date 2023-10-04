@@ -54,7 +54,7 @@ export const ProductCard = ({ product,cart,setCart }) => {
 <div>
       
       <Card>
-        <Card.Img variant="top" src={product.img_url} onClick={handleShowPreview} />
+        <Card.Img height="250px" variant="top" src={product.img_url} onClick={handleShowPreview} />
         <Card.Body>
           <Card.Title>{product.name}</Card.Title>
           <Card.Text>{product.category_name}</Card.Text>

@@ -84,7 +84,7 @@ export const getUser=()=>{
 
 export const MyContext = createContext();
 export const MyProvider = (props) => {
-  const [search,setSearch]=useState("abc")
+  const [search,setSearch]=useState("")
   const [context, setContext] = useState({ 'user': getUser(),'search':"sear",'setSearch': setSearch });
 
   return (

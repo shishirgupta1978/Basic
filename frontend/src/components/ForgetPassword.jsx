@@ -1,11 +1,12 @@
 // Login.js
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useParams } from 'react-router-dom';
 import { Input } from './Input';
 import { Button } from 'react-bootstrap';
 
 export const ForgetPassword=()=> {
   const [Email, setEmail] = useState('');
+  const { website } = useParams();
 
   const handleEmail = () => {
     // Add your login logic here
@@ -21,7 +22,7 @@ export const ForgetPassword=()=> {
         onChange={(e) => setEmail(e.target.value)}
       />
 					<Button variant="dark" type="submit" onClick={handleEmail}>Send Email </Button>
-      <p style={{textAlign:'left'}}>Back to <NavLink to="/login">Login Page</NavLink></p>
+      <p style={{textAlign:'left'}}>Back to <NavLink to={`/${website}/login/`}>Login Page</NavLink></p>
     </div>
   );
 }

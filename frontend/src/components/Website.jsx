@@ -24,7 +24,7 @@ export const Website = () => {
         axiosApi(`api/userprofile/get-website/${website}/`, config, setData, setContext);
     
 
-	}, []);
+	}, [website]);
 
 
 
