@@ -15,7 +15,7 @@ import {Badge} from  'react-bootstrap';
 
 export const WebsiteHeader = (props) => {
   
-  const { context, setContext } = useContext(MyContext);
+  const { context, setContext,search,setSearch } = useContext(MyContext);
   const [timeLeft, setTimeLeft] = useState(null);
   const [timer, setTimer] = useState(null);
   const [jwtToken, setJwtToken] = useState(null);
@@ -89,9 +89,9 @@ export const WebsiteHeader = (props) => {
       <Container fluid>
         <Navbar.Brand as={Link} to="/">{props.data.logo_img_url && <img height='35px' src={props.data.logo_img_url} className='logoimg'/>} {props.data.brand_name} </Navbar.Brand>
         <Nav className="m-auto"><Nav.Link>
-          <input onChange={(e)=>setContext({...context,search:e.target.value})} 
+          <input onChange={(e)=>setSearch(e.target.value)} 
             type="search"  
-            value={context.search}
+            value={search}
             placeholder="Seadrch"  
             className="ms-2"  
           />  

@@ -84,11 +84,11 @@ export const getUser=()=>{
 
 export const MyContext = createContext();
 export const MyProvider = (props) => {
-  const [search,setSearch]=useState("")
+  const [search,setSearch]=useState("abc")
   const [context, setContext] = useState({ 'user': getUser(),'search':"sear",'setSearch': setSearch });
 
   return (
-    <MyContext.Provider value={{ context, setContext }}>
+    <MyContext.Provider value={{ context, setContext,search,setSearch }}>
       {props.children}
     </MyContext.Provider>
   );
