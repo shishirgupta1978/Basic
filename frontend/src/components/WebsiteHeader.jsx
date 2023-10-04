@@ -88,14 +88,15 @@ export const WebsiteHeader = (props) => {
     <Navbar expand="lg" bg='dark' variant='dark'>
       <Container fluid>
         <Navbar.Brand as={Link} to="/">{props.data.logo_img_url && <img height='35px' src={props.data.logo_img_url} className='logoimg'/>} {props.data.brand_name} </Navbar.Brand>
-        <Nav className="m-auto"><Form className="d-flex">  
-          <FormControl  
+        <Nav className="m-auto"><Nav.Link>
+          <input onChange={(e)=>setContext({...context,search:e.target.value})} 
             type="search"  
-            placeholder="Search"  
+            value={context.search}
+            placeholder="Seadrch"  
             className="ms-2"  
-            aria-label="Search"  
           />  
-        </Form>  </Nav>
+         </Nav.Link>
+   </Nav>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         
@@ -103,7 +104,8 @@ export const WebsiteHeader = (props) => {
           <Nav className="ms-auto">
 
             <Nav.Link as={Link} to={`/${props.website}/`}>Home</Nav.Link>
-            <Nav.Link as={Link} to={`/${props.website}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link> 
+            <Nav.Link as={Link} to={`/${props.website}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link>
+            
             {context.user ? <> <NavDropdown  title={"Hi, "+context.user.username} id="collasible-nav-dropdown" align="end">
             <NavDropdown.Item as={Link} to={`/${props.website}/profile/`}>Update Profile </NavDropdown.Item>
 

@@ -11,6 +11,11 @@ export const setuser =(token)=>{
 localStorage.setItem("Tokens",token)
 }
 
+
+export const getSearch =()=>{
+ 
+  }
+
 const msghandle =(error)=>{
   const details=(error.response && error.response.data && error.response.data.detail)
   if(details)
@@ -79,7 +84,8 @@ export const getUser=()=>{
 
 export const MyContext = createContext();
 export const MyProvider = (props) => {
-  const [context, setContext] = useState({ 'user': getUser() });
+  const [search,setSearch]=useState("")
+  const [context, setContext] = useState({ 'user': getUser(),'search':"sear",'setSearch': setSearch });
 
   return (
     <MyContext.Provider value={{ context, setContext }}>
