@@ -19,7 +19,6 @@ export const Website = () => {
 
 
 	useEffect(() => {
-    console.log(website);
 
         const config = { method: "get", headers: { "Content-Type": "application/json" } }
         axiosApi(`api/userprofile/get-website/${website}/`, config, setData, setContext);

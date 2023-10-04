@@ -18,10 +18,11 @@ export const Urls=()=> {
       <Routes>
         <Route path="/" element={<Navigate to="/webmaster/" />}/>
         
+        
         <Route path="/:website/" element={<Website />}>
         <Route index element={ <Products/>}/>
         <Route path="weblist" element={<WebList/>}/>
-        <Route path="cart" element={<Cart/>}/>
+        <Route path="cart" element={<PrivateRoute><Cart/></PrivateRoute>}/>
         <Route path="login" element={<Login/>}/>
         <Route path="forgetpassword" element={<ForgetPassword/>}/>
         <Route path="register" element={<Register/>}/>

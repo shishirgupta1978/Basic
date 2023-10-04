@@ -37,12 +37,12 @@ export const Login=()=> {
 			localStorage.setItem("Tokens",JSON.stringify(data.result));
      	    setContext({...context,user:jwt_decode(data.result.access)});
 
-	//		navigate("/");
+			navigate(-1);
 
 		}
 		if(context.user)
 		{
-			navigate("/");
+			navigate(-1);
 		}
 
 	}, [data,context.user]);

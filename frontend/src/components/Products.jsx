@@ -20,6 +20,7 @@ export const Products = () => {
 
     if(website.toLowerCase()=="webmaster")
     {
+     
       navigate("/webmaster/weblist/");
     }
     const config = { method: "get", headers: { "Content-Type": "application/json" } }

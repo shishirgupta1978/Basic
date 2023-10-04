@@ -88,32 +88,50 @@ export const WebsiteHeader = (props) => {
     <Navbar expand="lg" bg='dark' variant='dark'>
       <Container fluid>
         <Navbar.Brand as={Link} to="/">{props.data.logo_img_url && <img height='35px' src={props.data.logo_img_url} className='logoimg'/>} {props.data.brand_name} </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="m-auto">{true &&<>
-            <Nav.Link as={Link} to={`/${props.website}/`}>Home</Nav.Link>
-            <Nav.Link as={Link} to={`/${props.website}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link>
-            
-</>}
-          </Nav>
+        <Nav className="m-auto"><Form className="d-flex">  
+          <FormControl  
+            type="search"  
+            placeholder="Search"  
+            className="ms-2"  
+            aria-label="Search"  
+          />  
+        </Form>  </Nav>
 
-          {context.user ?
-          
-          <Nav className="ml-auto">
-            
-            <Nav.Link as={Link} to={`/${props.website}/profile/`}>Hi, {context.user.username} {false &&<img
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ms-auto">
+
+            <Nav.Link as={Link} to={`/${props.website}/`}>Home</Nav.Link>
+            <Nav.Link as={Link} to={`/${props.website}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link> 
+            {context.user ? <> <NavDropdown  title={"Hi, "+context.user.username} id="collasible-nav-dropdown" align="end">
+            <NavDropdown.Item as={Link} to={`/${props.website}/profile/`}>Update Profile </NavDropdown.Item>
+
+            {false && <img
                         src={context.user.profile_pic ? BASE_URL + context.user.profile_pic : NoProfileImg}
                         alt='profile image' style={{height:'24px'}}
                         className='rounded-circle'
-                      />}</Nav.Link>
-            <Nav.Link as={Link} to={`/${props.website}/changepassword/`}>Change Password</Nav.Link>
-            <Nav.Link  onClick={logoutHandler}>Logout</Nav.Link>
-          </Nav> :          <Nav className="ml-auto">
-          <Nav.Link as={Link} to={`/${props.website}/login`}>Login</Nav.Link>
+                      />}    
+              <NavDropdown.Item  as={Link} to={`/${props.website}/changepassword/`}>Change Password</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item  onClick={logoutHandler}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+                         
+            
+            
+           </>:          
+          <Nav.Link as={Link} to={`/${props.website}/login`}>Login</Nav.Link> }
           </Nav>
 
+            
+         
+
+          
+
        
-}
+
           
 </Navbar.Collapse>   
       </Container>
