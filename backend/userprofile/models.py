@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     logo_img_url = models.CharField(verbose_name=_("Logo Url"), max_length=255,blank=True,null=True)
     brand_name = models.CharField(verbose_name=_("Brand Name"), max_length=50,blank=True,null=True)
     contact = models.TextField(verbose_name=_("contact"),blank=True,null=True)
-    about = models.TextField(verbose_name=_("About"),blank=True,null=True)
+    aboutus = models.TextField(verbose_name=_("About"),blank=True,null=True)
     footnote=models.CharField(verbose_name=_("footnote"), max_length=100,blank=True,null=True)
     def __str__(self):
         return self.user.username+"'s profile"
