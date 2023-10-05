@@ -26,4 +26,5 @@ export * from './utility';
 export * from './Website';
 export * from './WebsiteProfile';
 export * from './WebList';
-
+export * from './AboutUs';
+export * from './Contact';

@@ -105,6 +105,8 @@ export const WebsiteHeader = (props) => {
           <Nav className="ms-auto">
 
             <Nav.Link as={Link} to={`/${props.website}/`}>Home</Nav.Link>
+            <Nav.Link as={Link} to={`/${props.website}/aboutus/`}>About Us</Nav.Link>
+            <Nav.Link as={Link} to={`/${props.website}/contact/`}>Contact Us</Nav.Link>
             <Nav.Link as={Link} to={`/${props.website}/cart/`}>Cart<sup style={{color:'yellow'}}></sup></Nav.Link>
             
             {context.user ? <> <NavDropdown  title={"Hi, "+context.user.username} id="collasible-nav-dropdown" align="end">

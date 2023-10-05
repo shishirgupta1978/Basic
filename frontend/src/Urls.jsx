@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 import {Routes,Route,Navigate} from 'react-router-dom'
-import { Layout, Login, Register, ActivateUser,HomePage,ForgetPassword, UpdateProfile,LogViewer,Utility,ChangePassword ,ResetPassword, CreateWebsite,WebsiteProfile,UpdateCategories,UpdateProducts,Cart,Products,Website, WebList } from './components'
+import { Layout, Login, Register, ActivateUser,HomePage,ForgetPassword, UpdateProfile,LogViewer,Utility,ChangePassword ,ResetPassword, CreateWebsite,WebsiteProfile,UpdateCategories,UpdateProducts,Cart,Products,Website, WebList,Contact,AboutUs } from './components'
 import { ToastContainer } from "react-toastify";
 
 import { PrivateRoute } from './utility'
@@ -26,6 +26,8 @@ export const Urls=()=> {
         <Route path="login" element={<Login/>}/>
         <Route path="forgetpassword" element={<ForgetPassword/>}/>
         <Route path="register" element={<Register/>}/>
+        <Route path="aboutus" element={<AboutUs/>}/>
+        <Route path="contact" element={<Contact/>}/>
         <Route path="activate/:uid/:token" element={<ActivateUser/>}/>
         <Route path="resetpassword" element={<ResetPassword/>}/>
         <Route path="profile" element={<PrivateRoute><UpdateProfile/></PrivateRoute>}/>
