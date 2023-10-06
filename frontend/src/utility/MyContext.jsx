@@ -85,7 +85,8 @@ export const getUser=()=>{
 export const MyContext = createContext();
 export const MyProvider = (props) => {
   const [search,setSearch]=useState("")
-  const [context, setContext] = useState({ 'user': getUser(),'search':"sear",'setSearch': setSearch });
+  
+  const [context, setContext] = useState({ 'user': getUser()});
 
   return (
     <MyContext.Provider value={{ context, setContext,search,setSearch }}>

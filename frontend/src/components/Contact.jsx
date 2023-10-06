@@ -1,18 +1,31 @@
 import React, { useEffect, useState,useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {Spinner,Title} from ".";
 import { BASE_URL,MyContext,axiosApi } from "../utility";
 import { Button, Container,Row,Col } from "react-bootstrap";
 import { toast } from "react-toastify";
-import {Spinner} from ".";
 import { Input } from ".";
 export const Contact = () => {
   
 
+    const { website } = useParams();
+    
+	const { context,setContext } = useContext(MyContext);
+	const [data, setData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
+    const [loadData, setLoadData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
+
+
+
+	useEffect(() => {
+
+        const config = { method: "get", headers: { "Content-Type": "application/json" } }
+        axiosApi(`api/userprofile/get-website/${website}/`, config, setLoadData, setContext);
+    
+
+	}, [website]);
+
 
   
-	const [loadData, setLoadData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
-	const [data, setData] = useState({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
-	const { context,setContext } = useContext(MyContext);
 
 	const [formData, setFormData] = useState({
 		
@@ -37,7 +50,7 @@ export const Contact = () => {
 	useEffect(()=>{
 		if(data.is_success)
 		{
-			toast.success("Record update successfully.")
+			toast.success("Mail send update successfully.")
 			setLoadData({ name: '', mobile_no:'', email:'', subject:'', message:''})
             setData({ 'is_loading': false, 'is_error': false, 'is_success': false, 'result': null, 'message': null })
 		}
@@ -56,7 +69,11 @@ export const Contact = () => {
 		};	
 
   return (
+
+
+
     <Container className="mt-2">
+        {loadData.is_loading && <Spinner />}
         <Row><Col>
 	<div className="form-container">
 	
@@ -80,7 +97,8 @@ export const Contact = () => {
 						</form>
 			</section>
 		</div>
-        </Col><Col></Col>
+        </Col><Col>        {loadData.is_success && loadData.result.profile && loadData.result.profile.contact && <pre>{loadData.result.profile.contact}</pre> 
+}</Col>
         </Row>
         </Container>
 
